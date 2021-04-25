@@ -9,19 +9,37 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Area2D",
+"class": "Downstairs",
+"language": "GDScript",
+"path": "res://prefabs/Downstairs.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Hero",
 "language": "GDScript",
 "path": "res://prefabs/Hero.gd"
 }, {
+"base": "Node2D",
+"class": "Level",
+"language": "GDScript",
+"path": "res://scenes/BaseLevel.gd"
+}, {
 "base": "Control",
 "class": "TextBalloon",
 "language": "GDScript",
 "path": "res://ui/TextBalloon.gd"
+}, {
+"base": "Area2D",
+"class": "Upstairs",
+"language": "GDScript",
+"path": "res://prefabs/Upstairs.gd"
 } ]
 _global_script_class_icons={
+"Downstairs": "",
 "Hero": "",
-"TextBalloon": ""
+"Level": "",
+"TextBalloon": "",
+"Upstairs": ""
 }
 
 [application]
@@ -102,6 +120,7 @@ move_down={
 
 2d_physics/layer_1="Character"
 2d_physics/layer_11="World"
+2d_physics/layer_12="Stairs"
 
 [physics]
 

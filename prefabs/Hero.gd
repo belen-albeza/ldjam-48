@@ -1,6 +1,8 @@
 extends KinematicBody2D
 class_name Hero
 
+signal speak_finished
+
 export(int, 0, 200) var MAX_SPEED := 100
 export(int, 0, 1000) var ACCELERATION := 1000
 export(int, 0, 1000) var FRICTION := 500
@@ -20,6 +22,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
   if is_frozen:
+    _velocity = Vector2.ZERO
     return
 
   # compute velocity out of player's input
@@ -47,11 +50,17 @@ func speak(phrases: Array) -> void:
   is_frozen = true
 
   var balloon := TEXT_BALLOON_SCENE.instance() as TextBalloon
-  ($BalloonPosition2D as Position2D).add_child(balloon)
+  var ui_node = get_node("../UI")
+  ui_node.add_child(balloon)
+  var balloon_position2D := ($BalloonPosition2D as Position2D)
+  # TODO: need to investigate why the anchor of the balloon seems to not being taken into account
+  var target_position = balloon_position2D.get_global_transform_with_canvas().origin + Vector2(-4, -16)
+  balloon.set_global_position(target_position)
   balloon.phrases = phrases
   balloon.connect("phrases_ended", self, "_on_text_balloon_ended", [balloon])
 
 func _on_text_balloon_ended(balloon: TextBalloon) -> void:
   balloon.queue_free()
   is_frozen = false
+  emit_signal("speak_finished")
 
