@@ -15,15 +15,17 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
   if event.is_action_released("ui_accept"):
-    show_next_phrase()
+    show_next_phrase(true)
 
 
 func set_phrases(new_phrases: Array) -> void:
   phrases = new_phrases
-  show_next_phrase()
+  show_next_phrase(false)
 
 
-func show_next_phrase() -> void:
+func show_next_phrase(shall_play_sfx: bool) -> void:
+  if shall_play_sfx:
+    ($Sfx as AudioStreamPlayer).play()
   var text = phrases.pop_front()
 
   if text:

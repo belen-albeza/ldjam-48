@@ -1,7 +1,11 @@
 extends KinematicBody2D
 class_name Hero
 
+enum Item { KEY }
+
 signal speak_finished
+signal item_picked_up(what)
+signal door_collided(door)
 
 export(int, 0, 200) var MAX_SPEED := 100
 export(int, 0, 1000) var ACCELERATION := 1000
@@ -34,6 +38,12 @@ func _physics_process(delta: float) -> void:
   # move the character
   move_and_slide(_velocity, Vector2.ZERO)
 
+  # handle looking direction
+  if input_dir.x > 0:
+    $Sprite.flip_h = false
+  elif input_dir.x < 0:
+    $Sprite.flip_h = true
+
 # Helper to get a normalized direction from the player's input
 func _get_direction_from_input() -> Vector2:
     var dir := Vector2(
@@ -42,6 +52,11 @@ func _get_direction_from_input() -> Vector2:
     )
 
     return dir.normalized()
+
+func pick_up(what: int) -> void:
+  ($SfxPickup as AudioStreamPlayer).play()
+  emit_signal("item_picked_up", what)
+
 
 func speak(phrases: Array) -> void:
   if is_frozen:

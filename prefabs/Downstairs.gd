@@ -19,5 +19,5 @@ func _ready() -> void:
 #  pass
 
 
-func _on_body_entered(body: Node) -> void:
+func _on_body_entered(_body: Node) -> void:
   emit_signal("hero_entered", self)
