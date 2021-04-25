@@ -15,6 +15,11 @@ _global_script_classes=[ {
 "path": "res://prefabs/Downstairs.gd"
 }, {
 "base": "KinematicBody2D",
+"class": "Dummy",
+"language": "GDScript",
+"path": "res://prefabs/Dummy.gd"
+}, {
+"base": "KinematicBody2D",
 "class": "Hero",
 "language": "GDScript",
 "path": "res://prefabs/Hero.gd"
@@ -36,6 +41,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Downstairs": "",
+"Dummy": "",
 "Hero": "",
 "Level": "",
 "TextBalloon": "",

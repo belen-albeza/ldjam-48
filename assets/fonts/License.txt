@@ -1,4 +1,4 @@
-	
+# Kenney Mini.ttf
 
 	Font package (free)
 
@@ -20,3 +20,7 @@
 
 	Follow on Twitter for updates:
 	@KenneyNL
+
+# DungeonFont.ttf
+
+Public Domain (Creative Common Zero)  https://vrtxrry.itch.io/dungeonfont

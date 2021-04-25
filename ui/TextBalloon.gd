@@ -3,11 +3,6 @@ class_name TextBalloon
 
 signal phrases_ended
 
-
-# Declare member variables here. Examples:
-# var a: int = 2
-# var b: String = "text"
-
 var phrases: Array = [""] setget set_phrases
 onready var label := ($MarginContainer/VBoxContainer/Label as Label)
 onready var continueArrow := ($Continue as Control)
@@ -17,10 +12,6 @@ onready var continueArrow := ($Continue as Control)
 func _ready() -> void:
   pass
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-#  pass
 
 func _input(event: InputEvent) -> void:
   if event.is_action_released("ui_accept"):
@@ -37,10 +28,14 @@ func show_next_phrase() -> void:
 
   if text:
     label.text = "  " + (text as String) + "  "
+    var new_size := _get_label_size()
+
+    # resize the balloon
+    set_size(new_size)
 
     # show or hide continue arrow
     if len(phrases) > 0:
-      var offset := _get_label_width() - 5
+      var offset := new_size.x - 5
       continueArrow.rect_position.x = offset
       continueArrow.show()
     else:
@@ -48,7 +43,9 @@ func show_next_phrase() -> void:
   else:
     emit_signal("phrases_ended")
 
-func _get_label_width() -> float:
+func _get_label_size() -> Vector2:
+  # ÑAPA: this is done to refresh the label size computation…
   label.hide()
   label.show()
-  return label.get_combined_minimum_size().x
+
+  return label.get_combined_minimum_size()

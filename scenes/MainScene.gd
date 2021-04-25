@@ -32,6 +32,18 @@ func _ready() -> void:
   VisualServer.set_default_clear_color(Color.black)
   setup_level()
 
+  hero.speak([
+    "Is this…",
+    "the surface?",
+    "What…",
+    "Why?",
+    "I just remember",
+    "being punished…",
+    "Why?",
+    "I need to go back",
+    "to the Underground",
+  ])
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta: float) -> void:
@@ -74,4 +86,4 @@ func change_level(level_scene):
     setup_level()
     current_level_index += 1
   else:
-    print("end game")
+    get_tree().change_scene("res://ui/EndScene.tscn")
